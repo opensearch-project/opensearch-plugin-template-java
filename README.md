@@ -7,9 +7,6 @@ It comes packaged with:
  - Notice and License files (Apache License, Version 2.0)
  - A `build.gradle` file supporting this template's current state.
 
-
-# How To Get Started With OpenSearch Plugins:
-
 ## Create your plugin repo using this template
 Click on "Use this Template"
 
