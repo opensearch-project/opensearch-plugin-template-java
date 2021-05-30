@@ -5,4 +5,4 @@
         h: component
 
   - match:
-      $body: /^plugin-template\n$/
+      $body: /^rename\n$/

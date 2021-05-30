@@ -5,11 +5,21 @@ apply plugin: 'idea'
 apply plugin: 'opensearch.opensearchplugin'
 apply plugin: 'opensearch.yaml-rest-test'
 
-def pluginName = 'plugin-template'
+def pluginName = 'rename'
 def pluginDescription = 'Custom plugin'
 def projectPath = 'org.opensearch'
 def pathToPlugin = 'path.to.plugin'
-def pluginClassName = 'TemplatePlugin'
+def pluginClassName = 'RenamePlugin'
+
+tasks.register("preparePluginPathDirs") {
+    mustRunAfter clean
+    doLast {
+        def newPath = pathToPlugin.replace(".", "/")
+        mkdir "src/main/java/org/opensearch/$newPath"
+        mkdir "src/test/java/org/opensearch/$newPath"
+        mkdir "src/yamlRestTest/java/org/opensearch/$newPath"
+    }
+}
 
 opensearchplugin {
     name pluginName
@@ -19,14 +29,10 @@ opensearchplugin {
     noticeFile rootProject.file('NOTICE.txt')
 }
 
-// Allow test cases to be named Tests without having to be inherited from LuceneTestCase.
-// see https://github.com/elastic/elasticsearch/blob/323f312bbc829a63056a79ebe45adced5099f6e6/buildSrc/src/main/java/org/elasticsearch/gradle/precommit/TestingConventionsTasks.java
-testingConventions.enabled = false
-
-licenseHeaders.enabled = true
-dependencyLicenses.enabled = false
-thirdPartyAudit.enabled = false
+// This requires an additional Jar not published as part of build-tools
 loggerUsageCheck.enabled = false
+
+// No need to validate pom, as we do not upload to maven/sonatype
 validateNebulaPom.enabled = false
 
 buildscript {
@@ -49,18 +55,9 @@ repositories {
     mavenLocal()
 }
 
-dependencies {
-    // required for the yaml test to run
-    yamlRestTestImplementation 'org.apache.logging.log4j:log4j-core:2.11.1'
-}
-
 test {
     include '**/*Tests.class'
-    systemProperty 'tests.security.manager', 'false'
 }
-
-// See package README.md for details on using these tasks.
-def _numNodes = findProperty('numNodes') as Integer ?: 1
 
 task integTest(type: RestIntegTestTask) {
     description = "Run tests against a cluster"
@@ -70,21 +67,6 @@ task integTest(type: RestIntegTestTask) {
 tasks.named("check").configure { dependsOn(integTest) }
 
 integTest {
-    // The 'doFirst' delays till execution time.
-    doFirst {
-        // Tell the test JVM if the cluster JVM is running under a debugger so that tests can
-        // use longer timeouts for requests.
-        def isDebuggingCluster = getDebug() || System.getProperty("test.debug") != null
-        systemProperty 'cluster.debug', isDebuggingCluster
-        // Set number of nodes system property to be used in tests
-        systemProperty 'cluster.number_of_nodes', "${_numNodes}"
-        // There seems to be an issue when running multi node run or integ tasks with unicast_hosts
-        // not being written, the waitForAllConditions ensures it's written
-        getClusters().forEach { cluster ->
-            cluster.waitForAllConditions()
-        }
-    }
-
     // The --debug-jvm command-line option makes the cluster debuggable; this makes the tests debuggable
     if (System.getProperty("test.debug") != null) {
         jvmArgs '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005'
@@ -93,27 +75,11 @@ integTest {
 
 testClusters.integTest {
     testDistribution = "INTEG_TEST"
-    // When running integration tests it doesn't forward the --debug-jvm to the cluster anymore
-    // i.e. we have to use a custom property to flag when we want to debug elasticsearch JVM
-    // since we also support multi node integration tests we increase debugPort per node
-    if (System.getProperty("opensearch.debug") != null) {
-        def debugPort = 5005
-        nodes.forEach { node ->
-            node.jvmArgs("-agentlib:jdwp=transport=dt_socket,server=n,suspend=y,address=*:${debugPort}")
-            debugPort += 1
-        }
-    }
+
+    // This installs our plugin into the testClusters
     plugin(project.tasks.bundlePlugin.archiveFile)
 }
 
 run {
-    doFirst {
-        // There seems to be an issue when running multi node run or integ tasks with unicast_hosts
-        // not being written, the waitForAllConditions ensures it's written
-        getClusters().forEach { cluster ->
-            cluster.waitForAllConditions()
-        }
-    }
-
     useCluster testClusters.integTest
 }
