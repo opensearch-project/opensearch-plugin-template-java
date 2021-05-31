@@ -31,6 +31,7 @@ opensearchplugin {
 
 // This requires an additional Jar not published as part of build-tools
 loggerUsageCheck.enabled = false
+
 // No need to validate pom, as we do not upload to maven/sonatype
 validateNebulaPom.enabled = false
 
