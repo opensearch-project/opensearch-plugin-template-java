@@ -22,11 +22,11 @@ import static org.hamcrest.Matchers.containsString;
 
 @ThreadLeakScope(ThreadLeakScope.Scope.NONE)
 @OpenSearchIntegTestCase.ClusterScope(scope = OpenSearchIntegTestCase.Scope.SUITE)
-public class TemplatePluginIT extends OpenSearchIntegTestCase {
+public class RenamePluginIT extends OpenSearchIntegTestCase {
 
     @Override
     protected Collection<Class<? extends Plugin>> nodePlugins() {
-        return Collections.singletonList(TemplatePlugin.class);
+        return Collections.singletonList(RenamePlugin.class);
     }
 
     public void testPluginInstalled() throws IOException {
@@ -34,6 +34,6 @@ public class TemplatePluginIT extends OpenSearchIntegTestCase {
         String body = EntityUtils.toString(response.getEntity());
 
         logger.info("response body: {}", body);
-        assertThat(body, containsString("plugin-template"));
+        assertThat(body, containsString("rename"));
     }
 }

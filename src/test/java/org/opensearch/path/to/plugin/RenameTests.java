@@ -7,9 +7,8 @@
  */
 package org.opensearch.path.to.plugin;
 
-import org.opensearch.plugins.Plugin;
+import org.opensearch.test.OpenSearchTestCase;
 
-
-public class TemplatePlugin extends Plugin {
-    // Implement the relevant Plugin Interfaces here
+public class RenameTests extends OpenSearchTestCase {
+    // Add unit tests for your plugin
 }
