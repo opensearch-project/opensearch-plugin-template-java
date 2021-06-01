@@ -163,13 +163,11 @@ tasks.register("preparePluginPathDirs") {
 ### Editing the CI workflow
 You may want to edit the CI of your new repo.
   
-In you new GitHub repo, head over to `.github/workflows/CI.yml`. This file describes the workflow for testing new push or pull-request actions on the repo.
-
+In your new GitHub repo, head over to `.github/workflows/CI.yml`. This file describes the workflow for testing new push or pull-request actions on the repo.
 Currently, it is configured to build the plugin and run all the tests in it.
 
 You may need to alter the dependencies required by your new plugin.
-
-Also, the version in the `Build OpenSearch` and in the `Build and Run Tests` steps should match your plugins version in the `build.gradle` file.
+Also, the **OpenSearch version** in the `Build OpenSearch` and in the `Build and Run Tests` steps should match your plugins version in the `build.gradle` file.
 
 To view more complex CI examples you may want to checkout the workflows in official OpenSearch plugins, such as [anomaly-detection](https://github.com/opensearch-project/anomaly-detection/blob/main/.github/workflows/CI.yml).
 
