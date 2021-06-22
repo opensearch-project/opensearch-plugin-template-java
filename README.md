@@ -1,6 +1,6 @@
 # Template for creating OpenSearch Plugins
 This Repo is a GitHub Template repository ([Learn more about that](https://docs.github.com/articles/creating-a-repository-from-a-template/)).
-Using it would create a new repo that is the boilerplate code required for an OpenSearch Plugin. 
+Using it would create a new repo that is the boilerplate code required for an [OpenSearch Plugin](https://opensearch.org/blog/technical-posts/2021/06/my-first-steps-in-opensearch-plugins/). 
 This plugin on its own would not add any functionality to OpenSearch, but it is still ready to be installed.
 It comes packaged with:
  - Integration tests of two types: Yaml and IntegTest.
