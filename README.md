@@ -175,4 +175,4 @@ To view more complex CI examples you may want to checkout the workflows in offic
 This code is licensed under the Apache 2.0 License. See [LICENSE](LICENSE).
 
 ## Copyright
-Copyright 2021 OpenSearch Contributors
+Copyright OpenSearch Contributors. See [NOTICE](NOTICE.txt) for details.
