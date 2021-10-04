@@ -37,13 +37,15 @@ validateNebulaPom.enabled = false
 
 buildscript {
     ext {
-        opensearch_version = "1.0.0-beta1"
+        opensearch_version = "1.1.0-SNAPSHOT"
     }
 
     repositories {
-        mavenCentral()
-        jcenter()
         mavenLocal()
+        maven { url "https://aws.oss.sonatype.org/content/repositories/snapshots" }
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        jcenter()
     }
 
     dependencies {
@@ -53,6 +55,10 @@ buildscript {
 
 repositories {
     mavenLocal()
+    maven { url "https://aws.oss.sonatype.org/content/repositories/snapshots" }
+    mavenCentral()
+    maven { url "https://plugins.gradle.org/m2/" }
+    jcenter()
 }
 
 test {
