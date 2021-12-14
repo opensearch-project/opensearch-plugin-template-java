@@ -12,9 +12,14 @@ jobs:
   build:
     strategy:
       matrix:
-        java: [14]
+        os:
+          - ubuntu-latest
+          - macOS-latest
+        java:
+          - 11
+          - 14
     name: Build and Test Plugin Template
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v2
@@ -25,4 +30,4 @@ jobs:
 
     - name: Build and Run Tests
       run: |
-          ./gradlew build -Dopensearch.version=1.1.0
+          ./gradlew build -Dopensearch.version=1.2.1
