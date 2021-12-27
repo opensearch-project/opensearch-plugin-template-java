@@ -27,6 +27,7 @@ nbactions.xml
 # gradle stuff
 .gradle/
 build/
+bin/
 
 # vscode stuff
 .vscode/
