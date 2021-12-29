@@ -172,7 +172,7 @@ Also, the **OpenSearch version** in the `Build OpenSearch` and in the `Build and
 To view more complex CI examples you may want to checkout the workflows in official OpenSearch plugins, such as [anomaly-detection](https://github.com/opensearch-project/anomaly-detection/blob/main/.github/workflows/CI.yml).
 
 ## License
-This code is licensed under the Apache 2.0 License. See [LICENSE](LICENSE).
+This code is licensed under the Apache 2.0 License. See [LICENSE.txt](LICENSE.txt).
 
 ## Copyright
 Copyright OpenSearch Contributors. See [NOTICE](NOTICE.txt) for details.
