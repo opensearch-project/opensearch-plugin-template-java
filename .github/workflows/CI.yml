@@ -29,4 +29,4 @@ jobs:
 
     - name: Build and Run Tests
       run: |
-          ./gradlew build -Dopensearch.version=1.2.3
+          ./gradlew build
