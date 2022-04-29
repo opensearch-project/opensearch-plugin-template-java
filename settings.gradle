@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'plugin-template'
-startParameter.excludedTaskNames=["validatePluginZipPom"]
+//startParameter.excludedTaskNames=["validatePluginZipPom"]
