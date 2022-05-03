@@ -30,3 +30,4 @@ jobs:
     - name: Build and Run Tests
       run: |
           ./gradlew build
+          ./gradlew help --task publishPluginZipPublicationToZipStagingRepository
