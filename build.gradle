@@ -22,6 +22,28 @@ tasks.register("preparePluginPathDirs") {
     }
 }
 
+allprojects {
+    project.ext.licenseName = 'The Apache Software License, Version 2.0'
+    project.ext.licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    publishing {
+        publications {
+            all {
+                pom.withXml { XmlProvider xml ->
+                    Node node = xml.asNode()
+                    node.appendNode('inceptionYear', '2022')
+                    node.appendNode('name', 'rename')
+                    node.appendNode('description', 'Custom plugin')
+                    Node license = node.appendNode('licenses').appendNode('license')
+                    license.appendNode('name', project.licenseName)
+                    license.appendNode('url', project.licenseUrl)
+                    Node developer = node.appendNode('developers').appendNode('developer')
+                    developer.appendNode('name', 'OpenSearch')
+                    developer.appendNode('url', 'https://github.com/opensearch-project/opensearch-plugin-template-java')
+                }
+            }
+        }
+    }
+}
 opensearchplugin {
     name pluginName
     description pluginDescription
