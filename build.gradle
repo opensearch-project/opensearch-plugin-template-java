@@ -4,6 +4,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'opensearch.opensearchplugin'
 apply plugin: 'opensearch.yaml-rest-test'
+apply plugin: 'opensearch.pluginzip'
 
 def pluginName = 'rename'
 def pluginDescription = 'Custom plugin'
@@ -21,6 +22,28 @@ tasks.register("preparePluginPathDirs") {
     }
 }
 
+publishing {
+    publications {
+        pluginZip(MavenPublication) { publication ->
+            pom {
+              name = pluginName
+              description = pluginDescription
+              licenses {
+                license {
+                  name = "The Apache License, Version 2.0"
+                  url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                }
+              }
+              developers {
+                developer {
+                  name = "OpenSearch"
+                  url = "https://github.com/opensearch-project/opensearch-plugin-template-java"
+                }
+              }
+            }
+        }
+    }
+}
 opensearchplugin {
     name pluginName
     description pluginDescription
