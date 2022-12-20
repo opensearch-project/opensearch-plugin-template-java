@@ -8,13 +8,15 @@
 package org.opensearch.path.to.plugin;
 
 import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.opensearch.client.Request;
 import org.opensearch.client.Response;
 import org.opensearch.plugins.Plugin;
 import org.opensearch.test.OpenSearchIntegTestCase;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -29,9 +31,9 @@ public class RenamePluginIT extends OpenSearchIntegTestCase {
         return Collections.singletonList(RenamePlugin.class);
     }
 
-    public void testPluginInstalled() throws IOException {
+    public void testPluginInstalled() throws IOException, ParseException {
         Response response = createRestClient().performRequest(new Request("GET", "/_cat/plugins"));
-        String body = EntityUtils.toString(response.getEntity());
+        String body = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
 
         logger.info("response body: {}", body);
         assertThat(body, containsString("rename"));
