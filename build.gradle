@@ -13,7 +13,6 @@ def pathToPlugin = 'path.to.plugin'
 def pluginClassName = 'RenamePlugin'
 group = "RenameGroup"
 
-
 tasks.register("preparePluginPathDirs") {
     mustRunAfter clean
     doLast {
