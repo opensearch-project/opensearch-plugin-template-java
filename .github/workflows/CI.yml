@@ -18,6 +18,7 @@ jobs:
           - windows-latest
         java:
           - 17
+          - 21
     name: Build and Test Plugin Template
     runs-on: ${{ matrix.os }}
 
