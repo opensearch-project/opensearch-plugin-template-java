@@ -2,6 +2,7 @@ import org.opensearch.gradle.test.RestIntegTestTask
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'eclipse'
 apply plugin: 'opensearch.opensearchplugin'
 apply plugin: 'opensearch.yaml-rest-test'
 apply plugin: 'opensearch.pluginzip'
