@@ -32,7 +32,7 @@ public class RenamePluginIT extends OpenSearchIntegTestCase {
     }
 
     public void testPluginInstalled() throws IOException, ParseException {
-        Response response = createRestClient().performRequest(new Request("GET", "/_cat/plugins"));
+        Response response = getRestClient().performRequest(new Request("GET", "/_cat/plugins"));
         String body = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
 
         logger.info("response body: {}", body);
