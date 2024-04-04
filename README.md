@@ -22,6 +22,7 @@ It comes packaged with:
    - [Running testClusters with the plugin installed](#running-testclusters-with-the-plugin-installed)
    - [Cleanup template code](#cleanup-template-code)
    - [Editing the CI workflow](#Editing-the-CI-workflow)
+   - [Naming conventions](#naming-conventions)
 3. [License](#license)
 4. [Copyright](#copyright)
 ---
@@ -189,6 +190,13 @@ You may need to alter the dependencies required by your new plugin.
 Also, the **OpenSearch version** in the `Build OpenSearch` and in the `Build and Run Tests` steps should match your plugins version in the `build.gradle` file.
 
 To view more complex CI examples you may want to checkout the workflows in official OpenSearch plugins, such as [anomaly-detection](https://github.com/opensearch-project/anomaly-detection/blob/main/.github/workflows/test_build_multi_platform.yml).
+
+### Naming conventions
+When naming API parameters, such as query parameters and request or response fields, note the following conventions:
+- Use snake case (for example, `use_case`), separating individual words with an underscore.
+- Replace hyphens with underscores (for example, for retrieval-augmented generation, use `retrieval_augmented_generation`).
+  
+When creating a new type of a component, take note of how other components of this type are named. For example, search processors are named omitting the word `processor` at the end (the collapse processor is called `collapse`).
 
 ## License
 This code is licensed under the Apache 2.0 License. See [LICENSE.txt](LICENSE.txt).
