@@ -63,7 +63,7 @@ validateNebulaPom.enabled = false
 
 buildscript {
     ext {
-        opensearch_version = System.getProperty("opensearch.version", "3.0.0-SNAPSHOT")
+        opensearch_version = System.getProperty("opensearch.version", "2.14.0")
     }
 
     repositories {
@@ -113,6 +113,8 @@ testClusters.integTest {
 run {
     useCluster testClusters.integTest
 }
+
+dependencyLicenses.enabled = false
 
 // updateVersion: Task to auto update version to the next development iteration
 task updateVersion {
