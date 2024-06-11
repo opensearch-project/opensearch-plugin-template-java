@@ -38,6 +38,6 @@ jobs:
     - name: Update version to the next development iteration
       if: matrix.os != 'windows-latest'
       run: |
-          # Task to auto update version to the next development iteration
+          # Task to auto update version to the next development iteration and test against that
           ./gradlew updateVersion -DnewVersion=2.15.0-SNAPSHOT && ./gradlew build
 
