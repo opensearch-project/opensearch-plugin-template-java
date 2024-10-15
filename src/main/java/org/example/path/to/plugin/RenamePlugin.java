@@ -5,10 +5,11 @@
  * this file be licensed under the Apache-2.0 license or a
  * compatible open source license.
  */
-package org.opensearch.path.to.plugin;
+package org.example.path.to.plugin;
 
-import org.opensearch.test.OpenSearchTestCase;
+import org.opensearch.plugins.Plugin;
 
-public class RenameTests extends OpenSearchTestCase {
-    // Add unit tests for your plugin
+
+public class RenamePlugin extends Plugin {
+    // Implement the relevant Plugin Interfaces here
 }
