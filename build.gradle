@@ -9,7 +9,7 @@ apply plugin: 'opensearch.pluginzip'
 
 def pluginName = 'rename'
 def pluginDescription = 'Custom plugin'
-def projectPath = 'org.opensearch'
+def packagePath = 'org.example'
 def pathToPlugin = 'path.to.plugin'
 def pluginClassName = 'RenamePlugin'
 group = "RenameGroup"
@@ -23,9 +23,9 @@ tasks.register("preparePluginPathDirs") {
     mustRunAfter clean
     doLast {
         def newPath = pathToPlugin.replace(".", "/")
-        mkdir "src/main/java/org/opensearch/$newPath"
-        mkdir "src/test/java/org/opensearch/$newPath"
-        mkdir "src/yamlRestTest/java/org/opensearch/$newPath"
+        mkdir "src/main/java/$packagePath/$newPath"
+        mkdir "src/test/java/$packagePath/$newPath"
+        mkdir "src/yamlRestTest/java/$packagePath/$newPath"
     }
 }
 
@@ -55,7 +55,7 @@ publishing {
 opensearchplugin {
     name pluginName
     description pluginDescription
-    classname "${projectPath}.${pathToPlugin}.${pluginClassName}"
+    classname "${packagePath}.${pathToPlugin}.${pluginClassName}"
     licenseFile rootProject.file('LICENSE.txt')
     noticeFile rootProject.file('NOTICE.txt')
 }

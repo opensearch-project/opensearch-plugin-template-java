@@ -66,7 +66,7 @@ This is the file tree structure of the source code, as you can see there are som
     |-- main
     |   `-- java
     |       `-- org
-    |           `-- opensearch
+    |           `-- example
     |               `-- path
     |                   `-- to
     |                       `-- plugin
@@ -74,7 +74,7 @@ This is the file tree structure of the source code, as you can see there are som
     |-- test
     |   `-- java
     |       `-- org
-    |           `-- opensearch
+    |           `-- example
     |               `-- path
     |                   `-- to
     |                       `-- plugin
@@ -83,7 +83,7 @@ This is the file tree structure of the source code, as you can see there are som
     `-- yamlRestTest
         |-- java
         |   `-- org
-        |       `-- opensearch
+        |       `-- example
         |           `-- path
         |               `-- to
         |                   `-- plugin
@@ -100,29 +100,35 @@ Now that you have named the repo, you can change the plugin class `RenamePlugin.
 Change `RenamePluginIT.java`, `RenameTests.java`, and `RenameClientYamlTestSuiteIT.java` accordingly, keeping the `PluginIT`, `Tests`, and `ClientYamlTestSuiteIT` suffixes.
 
 ### Plugin Path 
-Notice these paths in the source tree:
-```
--- path
-   `-- to
-       `-- plugin
-```
+You will need to change these paths in the source tree:
 
-Let's call this our *plugin path*, as the plugin class would be installed in OpenSearch under that path.
-This can be an existing path in OpenSearch, or it can be a unique path for your plugin. We recommend changing it to something meaningful.
-Change all these path occurrences to match the path you chose for your plugin:
-- Chose a new plugin path
-- Go to the `build.gradle` file and update the `pathToPlugin` param with the path you've chosen (use dotted notation)
-- Run `./gradlew preparePluginPathDirs` in the terminal
-- Move the java classes into the new directories (will require to edit the `package` name in the files as well)
-- Delete the old directories
+1) Package Path
+    ```
+    `-- org
+        `-- example
+    ```
+    Let's call this our *package path*. In Java, package naming convention is to use a domain name in order to create a unique package name.
+    This is normally your organization's domain.
+
+2) Plugin Path
+    ```
+     `-- path
+         `-- to
+             `-- plugin
+    ```
+    Let's call this our *plugin path*, as the plugin class would be installed in OpenSearch under that path.
+    This can be an existing path in OpenSearch, or it can be a unique path for your plugin. We recommend changing it to something meaningful.
+
+3) Change all these path occurrences to match your chosen path and naming by following [this](#update-the-buildgradle-file) section
 
 ### Update the `build.gradle` file
 
-Update the following section, using the new repository name and description, plugin class name, and plugin path:
+Update the following section, using the new repository name and description, plugin class name, package and plugin paths:
 
 ```
 def pluginName = 'rename'                // Can be the same as new repo name except including words `plugin` or `OpenSearch` is discouraged
 def pluginDescription = 'Custom plugin'  // Can be same as new repo description
+def packagePath = 'org.example'          // The package name for your plugin (convention is to use your organization's domain name)
 def pathToPlugin = 'path.to.plugin'      // The path you chose for the plugin
 def pluginClassName = 'RenamePlugin'     // The plugin class name
 ```
@@ -133,6 +139,10 @@ Next update the version of OpenSearch you want the plugin to be installed into. 
         opensearch_version = "1.0.0-beta1" // <-- change this to the version your plugin requires
     }
 ```
+
+- Run `./gradlew preparePluginPathDirs` in the terminal
+- Move the java classes into the new directories (will require to edit the `package` name in the files as well)
+- Delete the old directories (the `org.example` directories)
 
 ### Update the tests
 Notice that in the tests we are checking that the plugin was installed by sending a GET `/_cat/plugins` request to the cluster and expecting `rename` to be in the response.
@@ -170,9 +180,9 @@ tasks.register("preparePluginPathDirs") {
     mustRunAfter clean
     doLast {
         def newPath = pathToPlugin.replace(".", "/")
-        mkdir "src/main/java/org/opensearch/$newPath"
-        mkdir "src/test/java/org/opensearch/$newPath"
-        mkdir "src/yamlRestTest/java/org/opensearch/$newPath"
+        mkdir "src/main/java/$packagePath/$newPath"
+        mkdir "src/test/java/$packagePath/$newPath"
+        mkdir "src/yamlRestTest/java/$packagePath/$newPath"
     }
 }
 ```
@@ -189,6 +199,20 @@ You may need to alter the dependencies required by your new plugin.
 Also, the **OpenSearch version** in the `Build OpenSearch` and in the `Build and Run Tests` steps should match your plugins version in the `build.gradle` file.
 
 To view more complex CI examples you may want to checkout the workflows in official OpenSearch plugins, such as [anomaly-detection](https://github.com/opensearch-project/anomaly-detection/blob/main/.github/workflows/test_build_multi_platform.yml).
+
+## Your Plugin's License
+Source code files in this template contains the following header:
+```
+/*
+* SPDX-License-Identifier: Apache-2.0
+*
+* The OpenSearch Contributors require contributions made to
+* this file be licensed under the Apache-2.0 license or a
+* compatible open source license.
+  */
+```
+This plugin template is indeed open-sourced while you might choose to use it to create a proprietary plugin.
+Be sure to update your plugin to meet any licensing requirements you may be subject to.
 
 ## License
 This code is licensed under the Apache 2.0 License. See [LICENSE.txt](LICENSE.txt).
