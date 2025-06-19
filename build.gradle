@@ -6,6 +6,7 @@ apply plugin: 'eclipse'
 apply plugin: 'opensearch.opensearchplugin'
 apply plugin: 'opensearch.yaml-rest-test'
 apply plugin: 'opensearch.pluginzip'
+apply plugin: 'opensearch.java-agent'
 
 def pluginName = 'rename'
 def pluginDescription = 'Custom plugin'
