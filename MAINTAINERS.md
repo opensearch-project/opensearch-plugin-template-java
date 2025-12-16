@@ -4,9 +4,14 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 
 ## Current Maintainers
 
-| Maintainer               | GitHub ID                                               | Affiliation |
-| ------------------------ | ------------------------------------------------------- | ----------- |
-| Amitai Stern             | [AmiStrn](https://github.com/AmiStrn)                   | Independent |
-| Daniel "dB." Doubrovkine | [dblock](https://github.com/dblock)                     | Independent |
-| Sarat Vemulapalli        | [saratvemulapalli](https://github.com/saratvemulapalli) | Amazon      |
-| Andriy Redko             | [reta](https://github.com/reta)                         | Independent |
+| Maintainer        | GitHub ID                                               | Affiliation |
+| ----------------- | ------------------------------------------------------- | ----------- |
+| Amitai Stern      | [AmiStrn](https://github.com/AmiStrn)                   | Independent |
+| Sarat Vemulapalli | [saratvemulapalli](https://github.com/saratvemulapalli) | Amazon      |
+| Andriy Redko      | [reta](https://github.com/reta)                         | Independent |
+
+## Emeritus
+
+| Maintainer               | GitHub ID                               | Affiliation |
+| ------------------------ | --------------------------------------- | ----------- |
+| Daniel "dB." Doubrovkine | [dblock](https://github.com/dblock)     | Independent |
