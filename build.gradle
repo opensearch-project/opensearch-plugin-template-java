@@ -69,7 +69,7 @@ validateNebulaPom.enabled = false
 
 buildscript {
     ext {
-        opensearch_version = System.getProperty("opensearch.version", "3.2.0-SNAPSHOT")
+        opensearch_version = System.getProperty("opensearch.version", "3.5.0-SNAPSHOT")
     }
 
     repositories {
@@ -89,6 +89,14 @@ repositories {
     maven { url "https://ci.opensearch.org/ci/dbc/snapshots/maven/" }
     mavenCentral()
     maven { url "https://plugins.gradle.org/m2/" }
+}
+
+configurations {
+    all {
+        resolutionStrategy {
+            force "com.google.errorprone:error_prone_annotations:${versions.error_prone_annotations}"
+        }
+    }
 }
 
 test {
