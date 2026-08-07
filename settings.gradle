@@ -7,4 +7,13 @@
  * in the user manual at https://docs.gradle.org/6.5.1/userguide/multi_project_builds.html
  */
 
+pluginManagement {
+    repositories {
+        maven { url "https://ci.opensearch.org/maven2/" }
+        maven { url "https://ci.opensearch.org/m2/" }
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
 rootProject.name = 'plugin-template'
